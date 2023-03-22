@@ -30,12 +30,12 @@ namespace SerializationWorkshop
 
             string data;
 
-            using (StreamReader writer = new StreamReader($"../../../{type.Name}"))
+            using (StreamReader writer = new StreamReader($"../../../{type.Name}.txt"))
             {
                 data = writer.ReadToEnd();
             }
 
-            string[] props = data.Split("|-|");
+            string[] props = data.Split("|-|", StringSplitOptions.RemoveEmptyEntries);
 
             T obj = (T)Activator.CreateInstance(type);
 
@@ -44,7 +44,7 @@ namespace SerializationWorkshop
                 string[] splittedProp = propPair.Split(":");
                 var propInfo = type.GetProperty(splittedProp[0]);
 
-                propInfo.SetValue(obj, splittedProp[1]);
+                propInfo.SetValue(obj, Convert.ChangeType(splittedProp[1], propInfo.PropertyType));
             }
             return obj;
         }

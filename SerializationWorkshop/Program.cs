@@ -6,6 +6,7 @@ namespace SerializationWorkshop
     {
         static void Main(string[] args)
         {
+            Product loadedProduct = Serializator.Load<Product>();
             Product product = new Product()
             {
                 Id = 1,
