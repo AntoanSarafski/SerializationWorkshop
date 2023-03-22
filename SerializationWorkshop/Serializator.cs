@@ -29,12 +29,12 @@ namespace SerializationWorkshop
 
             Type type = typeof(T);
 
-            if (File.Exists($"../../../{type.Name}.txt"))
+            if (!File.Exists($"../../../{type.Name}.txt"))
             {
                 return default(T);
             }
 
-            string data;
+            string data = "";
 
             using (StreamReader writer = new StreamReader($"../../../{type.Name}.txt"))
             {

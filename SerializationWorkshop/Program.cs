@@ -6,11 +6,11 @@ namespace SerializationWorkshop
     {
         static void Main(string[] args)
         {
-            Product product = Serializator.Load<Product>();
+            Product loadedProduct = Serializator.Load<Product>();
 
-            if (product == null)
+            if (loadedProduct == null)
             {
-                product = new Product()
+                loadedProduct = new Product()
                 {
                     Id = 1,
                     Price = 100,
@@ -19,10 +19,21 @@ namespace SerializationWorkshop
             }
             
 
-            Serializator.Save(product);
-            
+            Serializator.Save(loadedProduct);
+        }
+        public class Product
+        {
+
+
+            public int Id { get; set; }
+
+            public decimal Price { get; set; }
+
+            public int Quantity { get; set; }
+
+            public string Model { get; set; }
         }
 
-        
+
     }
 }
