@@ -7,7 +7,7 @@ namespace SerializationWorkshop
 {
     public class Serializator
     {
-        public void Save(object obj)
+        public static void Save(object obj)
         {
             Type type = obj.GetType();
 
@@ -22,6 +22,31 @@ namespace SerializationWorkshop
             {
                 writer.Write(writer.ToString());
             }
+        }
+
+        public static T Load<T>()
+        {
+            Type type = typeof(T);
+
+            string data;
+
+            using (StreamReader writer = new StreamReader($"../../../{type.Name}"))
+            {
+                data = writer.ReadToEnd();
+            }
+
+            string[] props = data.Split("|:|");
+
+            T obj = (T)Activator.CreateInstance(type);
+
+            foreach (var propPair in props)
+            {
+                string[] splittedProp = propPair.Split(":");
+                var propInfo = type.GetProperty(splittedProp[0]);
+
+                propInfo.SetValue(obj, splittedProp[1]);
+            }
+            return obj;
         }
     }
 }
