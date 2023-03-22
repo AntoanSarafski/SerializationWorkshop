@@ -15,12 +15,12 @@ namespace SerializationWorkshop
 
             foreach (var prop in type.GetProperties())
             {
-                result.Append($"{prop.Name}:{prop.GetValue(obj)}|:|");
+                result.Append($"{prop.Name}:{prop.GetValue(obj)}|-|");
 
             }
-            using (StreamWriter writer = new StreamWriter($"../../../{type.Name}"))
+            using (StreamWriter writer = new StreamWriter($"../../../{type.Name}.txt"))
             {
-                writer.Write(writer.ToString());
+                writer.Write(result.ToString());
             }
         }
 
@@ -35,7 +35,7 @@ namespace SerializationWorkshop
                 data = writer.ReadToEnd();
             }
 
-            string[] props = data.Split("|:|");
+            string[] props = data.Split("|-|");
 
             T obj = (T)Activator.CreateInstance(type);
 

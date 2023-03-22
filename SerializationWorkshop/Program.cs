@@ -6,7 +6,17 @@ namespace SerializationWorkshop
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Product product = new Product()
+            {
+                Id = 1,
+                Price = 100,
+                Model = "New"
+            };
+
+            Serializator.Save(product);
+            
         }
+
+        
     }
 }
