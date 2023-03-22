@@ -26,7 +26,13 @@ namespace SerializationWorkshop
 
         public static T Load<T>()
         {
+
             Type type = typeof(T);
+
+            if (File.Exists($"../../../{type.Name}.txt"))
+            {
+                return default(T);
+            }
 
             string data;
 

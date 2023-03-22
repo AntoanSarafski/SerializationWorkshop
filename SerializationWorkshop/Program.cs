@@ -6,13 +6,18 @@ namespace SerializationWorkshop
     {
         static void Main(string[] args)
         {
-            Product loadedProduct = Serializator.Load<Product>();
-            Product product = new Product()
+            Product product = Serializator.Load<Product>();
+
+            if (product == null)
             {
-                Id = 1,
-                Price = 100,
-                Model = "New"
-            };
+                product = new Product()
+                {
+                    Id = 1,
+                    Price = 100,
+                    Model = "New"
+                };
+            }
+            
 
             Serializator.Save(product);
             
